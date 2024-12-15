@@ -1,7 +1,3 @@
-
-
-
-
 import chalk from 'chalk';
 import ora from 'ora';
 
@@ -32,9 +28,12 @@ async function searchApps() {
     output: process.stdout
   });
 
+  console.log(chalk.bold.green('Starting the app...')); // Log to confirm execution
+
   const question = (query) => new Promise((resolve) => readline.question(query, resolve));
 
   console.log(chalk.bold.green('Welcome to the Google Play App ID Finder!'));
+  console.log(chalk.yellow('Made By Lissa\n'));
   console.log(chalk.yellow('Enter app names to search, or type "exit" to quit.\n'));
 
   while (true) {
@@ -42,6 +41,7 @@ async function searchApps() {
     
     if (searchTerm.toLowerCase() === 'exit') {
       console.log(chalk.bold.green('Thank you for using the App ID Finder. Goodbye!'));
+      console.log(chalk.yellow('Made By Lissa'));
       break;
     }
 
@@ -57,7 +57,7 @@ async function searchApps() {
         console.log(chalk.bold.white(`${index + 1}. ${app.title}`));
         console.log(chalk.cyan(`   App ID: ${chalk.bold(app.appId)}`));
         console.log(chalk.magenta(`   Developer: ${app.developer}`));
-        console.log(chalk.yellow(`   Rating: ${app.score.toFixed(1)} ⭐`));
+        console.log(chalk.yellow(`   Rating: ${app.score ? app.score.toFixed(1) : 'N/A'} ⭐`));
         console.log(chalk.blue(`   Icon URL: ${app.icon}`));
         console.log('');
       });
@@ -72,5 +72,3 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 }
 
 export { findAppIds };
-
-
