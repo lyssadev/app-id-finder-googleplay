@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Vue App ID Finder</h1>
+    <h1>Vue App ID Finder Web App</h1>
     <AppIdFinder />
   </div>
 </template>

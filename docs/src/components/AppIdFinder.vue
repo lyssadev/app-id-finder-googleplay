@@ -1,6 +1,6 @@
 <template>
   <div class="app-id-finder">
-    <h1>App ID Finder</h1>
+    <h1>App ID Finder Web App</h1>
     <input v-model="appName" placeholder="Enter App Name" />
     <button @click="findAppId">Find App ID</button>
     <div v-if="appId">
@@ -32,11 +32,11 @@ export default {
       }
 
       try {
-        const response = await fetch(`https://api.example.com/find-app-id?name=${this.appName}`);
+        const response = await fetch(`/api/search?term=${this.appName}`);
         const data = await response.json();
 
-        if (data && data.appId) {
-          this.appId = data.appId;
+        if (data && data.length > 0) {
+          this.appId = data[0].appId;
         } else {
           this.error = 'App ID not found.';
         }

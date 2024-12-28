@@ -1,7 +1,7 @@
-# Vue App ID Finder
+# Vue App ID Finder Web App
 
 ## Overview
-Vue App ID Finder is a simple Vue.js application that allows users to find app IDs from Google Play. The application provides a user-friendly interface to search for apps and retrieve their corresponding IDs.
+Vue App ID Finder Web App is a simple Vue.js application that allows users to find app IDs from Google Play. The application provides a user-friendly interface to search for apps and retrieve their corresponding IDs.
 
 ## Project Structure
 ```
