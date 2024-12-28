@@ -1,0 +1,22 @@
+{
+  "name": "vue-app-id-finder",
+  "version": "1.0.0",
+  "description": "A Vue.js application to find app IDs from Google Play.",
+  "main": "src/main.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^3.0.0",
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^4.5.0",
+    "@vue/cli-plugin-babel": "^4.5.0",
+    "babel-eslint": "^10.1.0"
+  }
+}
