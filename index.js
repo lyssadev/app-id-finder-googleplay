@@ -1,5 +1,9 @@
+import express from 'express';
 import chalk from 'chalk';
 import ora from 'ora';
+
+const app = express();
+const port = process.env.PORT || 3000;
 
 async function findAppIds(searchTerm, limit = 5) {
   try {
@@ -14,7 +18,9 @@ async function findAppIds(searchTerm, limit = 5) {
       title: app.title,
       developer: app.developer,
       score: app.score,
-      icon: app.icon
+      icon: app.icon,
+      size: app.size,
+      url: app.url
     }));
   } catch (error) {
     console.error(chalk.red('Error searching for apps:', error.message));
@@ -22,53 +28,21 @@ async function findAppIds(searchTerm, limit = 5) {
   }
 }
 
-async function searchApps() {
-  const readline = (await import('readline')).createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-
-  console.log(chalk.bold.green('Starting the app...')); // Log to confirm execution
-
-  const question = (query) => new Promise((resolve) => readline.question(query, resolve));
-
-  console.log(chalk.bold.green('Welcome to the Google Play App ID Finder!'));
-  console.log(chalk.yellow('Made By Lissa\n'));
-  console.log(chalk.yellow('Enter app names to search, or type "exit" to quit.\n'));
-
-  while (true) {
-    const searchTerm = await question(chalk.cyan('Enter an app name to search: '));
-    
-    if (searchTerm.toLowerCase() === 'exit') {
-      console.log(chalk.bold.green('Thank you for using the App ID Finder. Goodbye!'));
-      console.log(chalk.yellow('Made By Lissa'));
-      break;
-    }
-
-    const spinner = ora('Searching for apps...').start();
-    const appResults = await findAppIds(searchTerm);
-    spinner.stop();
-
-    if (appResults.length === 0) {
-      console.log(chalk.yellow('\nNo results found.\n'));
-    } else {
-      console.log(chalk.bold.green('\nSearch Results:\n'));
-      appResults.forEach((app, index) => {
-        console.log(chalk.bold.white(`${index + 1}. ${app.title}`));
-        console.log(chalk.cyan(`   App ID: ${chalk.bold(app.appId)}`));
-        console.log(chalk.magenta(`   Developer: ${app.developer}`));
-        console.log(chalk.yellow(`   Rating: ${app.score ? app.score.toFixed(1) : 'N/A'} ⭐`));
-        console.log(chalk.blue(`   Icon URL: ${app.icon}`));
-        console.log('');
-      });
-    }
+app.get('/api/search', async (req, res) => {
+  const { term, limit } = req.query;
+  if (!term) {
+    return res.status(400).json({ error: 'Search term is required' });
   }
 
-  readline.close();
-}
+  const spinner = ora('Searching for apps...').start();
+  const appResults = await findAppIds(term, limit ? parseInt(limit, 10) : 5);
+  spinner.stop();
 
-if (import.meta.url === `file://${process.argv[1]}`) {
-  searchApps();
-}
+  res.json(appResults);
+});
+
+app.listen(port, () => {
+  console.log(chalk.bold.green(`Server is running on http://localhost:${port}`));
+});
 
 export { findAppIds };
