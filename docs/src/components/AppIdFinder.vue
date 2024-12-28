@@ -32,7 +32,7 @@ export default {
       }
 
       try {
-        const response = await fetch(`/api/search?term=${this.appName}`);
+        const response = await fetch(`https://your-api-endpoint.com/api/search?term=${this.appName}`);
         const data = await response.json();
 
         if (data && data.length > 0) {
