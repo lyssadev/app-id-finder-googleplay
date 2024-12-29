@@ -1,19 +1,21 @@
 {
-  "dependencies": {
-    "chalk": "^5.3.0",
-    "google-play-scraper": "^10.0.1",
-    "ora": "^8.1.1"
-  },
   "name": "app-id-finder-googleplay",
-  "version": "1.0.0",
-  "description": "This Node.js script allows you to search for and retrieve App IDs and other information about apps on the Google Play Store.",
-  "main": "index.js",
-  "type": "module",
-  "devDependencies": {},
+  "version": "1.2.0",
+  "description": "A CLI tool to find similar apps on Google Play Store by app name with enhanced terminal output.",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js"
   },
-  "keywords": [],
-  "author": "",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "google-play-scraper": "^9.2.0",
+    "inquirer": "^8.0.0"
+  },
+  "keywords": [
+    "google-play",
+    "app-finder",
+    "cli"
+  ],
+  "author": "lyssadev",
   "license": "ISC"
 }
